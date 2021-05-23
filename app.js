@@ -25,7 +25,7 @@ const expressHbs = require('express-handlebars') // HandleBars
 // })
 
 // Parsing Requests
-app.engine('hbs', expressHbs({layoutsDir:'views/layouts/', defaultLayout:'main-layout'}));
+app.engine('hbs', expressHbs({layoutsDir:'views/layouts/', defaultLayout:'main-layout',extname:"hbs"}));
 // app.set("view engine","pug");
 app.set("view engine", 'hbs') // now we'll use handlebars instead of pug
 // template engine to be used 
