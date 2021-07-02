@@ -5,12 +5,18 @@ const rootDir = require('../util/path');
 
 const products = [];
 
-router.get('/add-product',(req,res,next)=>{
-    console.log("Adding Product");
+
+router.get('/add-product', (req, res, next) => {
     // res.send("<form action='/admin/product' method='POST'><input type='text' name='title'><button type='submit'>Add Product</button></form>");
     // res.sendFile(path.join(rootDir,'views','add-product.html'));
-    res.render("add-product",{"pageTitle": "Add Product","path":"/admin/add-product","activeProduct":true,"formCSS":true,"productCSS":true});
-});
+    res.render('add-product', {
+      pageTitle: 'Add Product',
+      path: '/admin/add-product',
+      formsCSS: true,
+      productCSS: true,
+      activeAddProduct: true
+    });
+  });
 
 // previously it was action= '/product' now action = '/admin/product' because we have mentioned admin as filtering path
 
