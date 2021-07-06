@@ -23,14 +23,14 @@ exports.postAddProduct = (req,res,next)=>{
 
 exports.getProducts = (req, res, next) => {
     // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
-    const products = Product.fetchAll(); // we don't have to use new keyword because it is a static function.
-    
-    res.render('shop', {
+    // we don't have to use new keyword because it is a static function.
+    Product.fetchAll(products=>{res.render('shop', {
       products: products,
       pageTitle: 'Shop',
       path: '/',
       hasProducts: products.length > 0,
       activeShop: true,
       productCSS: true
-    });
-  }
+    })})
+    
+  };
