@@ -4,38 +4,45 @@ const Cart = require('../models/cart');
 exports.getProducts = (req, res, next) => {
     // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
     // we don't have to use new keyword because it is a static function.
-    Product.fetchAll(products=>{res.render('shop/product-list', {
-      products: products,
-      pageTitle: 'All Products',
-      path: '/products',
-      hasProducts: products.length > 0,
-      activeShop: true,
-      productCSS: true
-    })})
+    Product.fetchAll().then(
+      ([rowData, fielData])=>{
+        res.render('shop/product-list', {
+          products: rowData,
+          pageTitle: 'All Products',
+          path: '/products',
+          hasProducts: rowData.length > 0,
+          activeShop: true,
+          productCSS: true
+        })
+      }
+    ).catch(err=>console.log(err));
     
   };
 
   exports.getProduct = (req,res,next) =>{
     const prodId = req.params.productId; // we have passed this productId param in routes.
-    Product.findById(prodId, product =>{
-      //console.log(product);
-      res.render('shop/product-detail',{
-        product: product,
-        pageTitle:"Product Details",
-        path:"/products"
-      })
-    })
+    Product.findById(prodId).then(
+      ([rowData, fieldData]) => {
+        res.render('shop/product-detail',{
+          product: rowData[0],
+          pageTitle:"Product Details",
+          path:"/products"
+        })
+      }
+    ).catch(err=>console.log(err));
   }
 
 exports.getIndex = (req, res, next) => {
-  Product.fetchAll(products=>{res.render('shop/index',{
-      products: products,
+  Product.fetchAll()
+  .then(([rows, fieldData])=>{
+    res.render('shop/index',{
+      products: rows,
       pageTitle: 'Shop',
       path: '/',
-      hasProducts: products.length > 0,
-      activeShop: true,
-      productCSS: true
-  })})
+    });
+  })
+  .catch(err => console.log(err));
+  
 };
 
 exports.getCart = (req,res,next) => {
