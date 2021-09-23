@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const expressHbs = require('express-handlebars') // HandleBars
+const expressHbs = require('express-handlebars'); // HandleBars
+const db = require('./util/database');
 // app.use((req,res,next)=>{
 //     console.log("FIRST");
 //     next();
@@ -38,6 +39,13 @@ app.set("views","views");
 // const adminData = require('./routes/admin');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
+// db.end(); // whenever we want to shut our application
+// db.execute('SELECT * from products').then(result => {
+//     console.log(result);
+// }).catch(err=>{
+//     console.log(err);
+// });
+// IT WAS FOR TESTING
 const path = require('path');
 const errorController = require('./controllers/error')
 app.use(bodyParser.urlencoded({extended:false}));
